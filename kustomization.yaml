@@ -1,0 +1,15 @@
+# kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+helmGlobals:
+  chartHome: .
+
+# Add the helm chart
+helmCharts:
+  - name: crewai-a2a-server
+    releaseName: image-generator-agent
+    version: 0.0.1
+  - name: ui-a2a-client
+    releaseName: ui-a2a-client
+    version: 0.0.1
