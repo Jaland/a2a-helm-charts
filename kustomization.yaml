@@ -10,6 +10,12 @@ helmCharts:
   - name: crewai-a2a-server
     releaseName: image-generator-agent
     version: 0.0.1
+  - name: langchain-a2a-server
+    releaseName: currency-conversion-agent
+    version: 0.0.1
+  - name: llama-index-a2a-server
+    releaseName: file-upload-agent
+    version: 0.0.1
   - name: ui-a2a-client
     releaseName: ui-a2a-client
     version: 0.0.1

@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "ui-a2a-client.name" -}}
+{{- define "llama-index-a2a-server.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "ui-a2a-client.fullname" -}}
+{{- define "llama-index-a2a-server.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "ui-a2a-client.chart" -}}
+{{- define "llama-index-a2a-server.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "ui-a2a-client.labels" -}}
-helm.sh/chart: {{ include "ui-a2a-client.chart" . }}
-{{ include "ui-a2a-client.selectorLabels" . }}
+{{- define "llama-index-a2a-server.labels" -}}
+helm.sh/chart: {{ include "llama-index-a2a-server.chart" . }}
+{{ include "llama-index-a2a-server.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,17 +45,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "ui-a2a-client.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "ui-a2a-client.name" . }}
+{{- define "llama-index-a2a-server.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "llama-index-a2a-server.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "ui-a2a-client.serviceAccountName" -}}
+{{- define "llama-index-a2a-server.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "ui-a2a-client.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "llama-index-a2a-server.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}

@@ -9,7 +9,7 @@ geminiAiSecret: "gemini-api-key"
 
 # This sets the container image more information can be found here: https://kubernetes.io/docs/concepts/containers/images/
 image:
-  repository: quay.io/a2a-jland-examples/a2a-crewai-server
+  repository: quay.io/a2a-jland-examples/llama-index-a2a-server
   # This sets the pull policy for images.
   pullPolicy: Always # IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
@@ -56,7 +56,7 @@ service:
   # This sets the service type more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
   type: ClusterIP
   # This sets the ports more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#field-spec-ports
-  port: 10001
+  port: 10010
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious

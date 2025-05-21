@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "ui-a2a-client.fullname" . }}
+  name: {{ include "langchain-a2a-server.fullname" . }}
   labels:
-    {{- include "ui-a2a-client.labels" . | nindent 4 }}
+    {{- include "langchain-a2a-server.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "ui-a2a-client.selectorLabels" . | nindent 6 }}
+      {{- include "langchain-a2a-server.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -18,7 +18,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "ui-a2a-client.labels" . | nindent 8 }}
+        {{- include "langchain-a2a-server.labels" . | nindent 8 }}
         {{- with .Values.podLabels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
@@ -27,7 +27,7 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "ui-a2a-client.serviceAccountName" . }}
+      serviceAccountName: {{ include "langchain-a2a-server.serviceAccountName" . }}
       {{- with .Values.podSecurityContext }}
       securityContext:
         {{- toYaml . | nindent 8 }}
@@ -44,6 +44,9 @@ spec:
             - name: http
               containerPort: {{ .Values.service.port }}
               protocol: TCP
+          env:
+            - name: HOST_OVERRIDE
+              value: {{ include "langchain-a2a-server.fullname" . }}
           envFrom:
             - secretRef:
                 name: {{ .Values.geminiAiSecret}}
